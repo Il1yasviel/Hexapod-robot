@@ -1,0 +1,4 @@
+../Core/Src/servo.c:15:6:Servo_Init	24	static
+../Core/Src/servo.c:22:6:Servo_Move	40	static
+../Core/Src/servo.c:45:6:Servo_Set_ID	40	static
+../Core/Src/servo.c:76:13:Servo_Transmit	16	static

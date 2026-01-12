@@ -1,0 +1,9 @@
+../Core/Src/main.c:86:1:__io_putchar	1
+../Core/Src/main.c:92:6:HAL_UART_RxCpltCallback	7
+../Core/Src/main.c:119:6:Set_Single_Servo	30
+../Core/Src/main.c:149:6:Set_Leg_Position	9
+../Core/Src/main.c:185:6:Apply_All_Servo_Positions	19
+../Core/Src/main.c:207:6:Process_Command	43
+../Core/Src/main.c:343:5:main	2
+../Core/Src/main.c:423:6:SystemClock_Config	3
+../Core/Src/main.c:466:6:Error_Handler	1

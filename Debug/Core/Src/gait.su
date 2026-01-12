@@ -1,0 +1,17 @@
+../Core/Src/gait.c:13:13:_Set_Prepare_Pose	16	static
+../Core/Src/gait.c:27:6:Gait_Init	4	static
+../Core/Src/gait.c:29:6:Gait_Stand_Still	24	static
+../Core/Src/gait.c:40:6:Gait_Tripod_Forward	32	static
+../Core/Src/gait.c:106:6:Gait_Tripod_Backward	24	static
+../Core/Src/gait.c:158:6:Gait_Tripod_TurnLeft	24	static
+../Core/Src/gait.c:227:6:Gait_Tripod_TurnRight	24	static
+../Core/Src/gait.c:307:6:Gait_Wave_Forward	480	static
+../Core/Src/gait.c:421:6:Gait_Wave_Backward	480	static
+../Core/Src/gait.c:505:13:_Gait_Wave_Turn_Engine	792	static
+../Core/Src/gait.c:643:6:Gait_Wave_TurnLeft	16	static
+../Core/Src/gait.c:648:6:Gait_Wave_TurnRight	16	static
+../Core/Src/gait.c:656:6:Gait_Ripple_Forward	480	static
+../Core/Src/gait.c:771:6:Gait_Ripple_Backward	480	static
+../Core/Src/gait.c:859:6:Gait_Trot_Forward	384	static
+../Core/Src/gait.c:959:6:Leg_Action_Forward	16	static
+../Core/Src/gait.c:998:6:Leg_Action_Backward	16	static
