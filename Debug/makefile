@@ -10,6 +10,16 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk
+-include DSP_LIB/Source/TransformFunctions/subdir.mk
+-include DSP_LIB/Source/SupportFunctions/subdir.mk
+-include DSP_LIB/Source/StatisticsFunctions/subdir.mk
+-include DSP_LIB/Source/MatrixFunctions/subdir.mk
+-include DSP_LIB/Source/FilteringFunctions/subdir.mk
+-include DSP_LIB/Source/FastMathFunctions/subdir.mk
+-include DSP_LIB/Source/ControllerFunctions/subdir.mk
+-include DSP_LIB/Source/ComplexMathFunctions/subdir.mk
+-include DSP_LIB/Source/CommonTables/subdir.mk
+-include DSP_LIB/Source/BasicMathFunctions/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk

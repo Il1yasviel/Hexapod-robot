@@ -40,6 +40,22 @@ void Gait_Tripod_Forward(uint8_t steps);
  */
 void Gait_Tripod_Backward(uint8_t steps);
 
+
+
+
+/**
+ * @brief 执行三角步态原地左转
+ * @param steps 转动的步数
+ */
+void Gait_Tripod_TurnLeft(uint8_t steps);
+
+/**
+ * @brief 执行三角步态原地右转
+ * @param steps 转动的步数
+ */
+void Gait_Tripod_TurnRight(uint8_t steps);
+
+
 /**
  * @brief 执行前进波动步态
  * @param steps 行走的步数

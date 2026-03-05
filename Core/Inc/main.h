@@ -57,6 +57,10 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define GPIO_Pin GPIO_PIN_12
+#define GPIO_GPIO_Port GPIOB
+#define SWITCH_Pin GPIO_PIN_13
+#define SWITCH_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

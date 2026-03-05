@@ -1,5 +1,3 @@
-/* FILE: main.c */
-
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -28,6 +26,7 @@
 #include "leg_inverse.h"
 #include "servo.h"
 #include "gait.h"
+#include "weapon.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -258,6 +257,36 @@ void Process_Command(const char* cmd)
         printf("执行: 站立\r\n");
         Gait_Stand_Still();
     }
+
+    // --- 新增：武器系统指令解析 ---
+	else if (strcmp(main_cmd, "weapon") == 0)
+	{
+		char* action_cmd = strtok(NULL, ":");
+		if (action_cmd == NULL)
+		{
+			printf("错误: 'weapon' 命令缺少动作 (例如: 'charge', 'fire', 'auto').\r\n");
+			return;
+		}
+
+		if (strcmp(action_cmd, "charge") == 0)
+		{
+			Weapon_Control(WEAPON_ACTION_CHARGE);
+		}
+		else if (strcmp(action_cmd, "fire") == 0)
+		{
+			Weapon_Control(WEAPON_ACTION_FIRE);
+		}
+		else if (strcmp(action_cmd, "auto") == 0) // <--- 新增的解析分支
+		{
+			Weapon_Control(WEAPON_ACTION_AUTO);
+		}
+		else
+		{
+			printf("错误: 未知的武器动作 '%s'.\r\n", action_cmd);
+		}
+	}
+
+
     else if (main_cmd[0] == 'c')
     {
         char* action_cmd = strtok(NULL, ":");
@@ -342,6 +371,7 @@ void Process_Command(const char* cmd)
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -368,31 +398,40 @@ int main(void)
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
 
-    Servo_Init(&huart1, SERVO_DE_PORT, SERVO_DE_PIN);
-    HAL_Delay(100);
-    Gait_Init();
-    Gait_Stand_Still();
-    HAL_Delay(1000);
+	Servo_Init(&huart1, SERVO_DE_PORT, SERVO_DE_PIN);
+	HAL_Delay(100);
+	Gait_Init();
+	Gait_Stand_Still();
 
-    HAL_UART_Receive_IT(&huart3, &rx_data, 1);
+    Weapon_Init();//初始化电磁炮
 
-    printf("\r\n六足机器人控制器已就绪.\r\n");
-    printf("--- 命令格式: gait_name:action[:steps] ---\r\n");
-    printf("  stand\r\n");
-    printf("  tripod:forward[:steps]\r\n");
-    printf("  tripod:backward[:steps]\r\n");
-    printf("  tripod:turn_left[:steps]\r\n");
-    printf("  tripod:turn_right[:steps]\r\n");
-    printf("  wave:forward[:steps]\r\n");
-    printf("  wave:backward[:steps]\r\n");
-    printf("  wave:turn_left[:steps]\r\n");
-    printf("  wave:turn_right[:steps]\r\n");
-    printf("  ripple:forward[:steps]\r\n");
-    printf("  ripple:backward[:steps]\r\n");
-    printf("  trot:forward[:steps]\r\n");
-    printf("--- 调试命令 ---\r\n");
-    printf("  c[腿号...]:set_point:x:y:z:time (同步)\r\n");
-    printf("  c[腿号...]:[forward|backward] (顺序)\r\n");
+	HAL_Delay(1000);
+
+	HAL_UART_Receive_IT(&huart3, &rx_data, 1);
+
+	printf("\r\n六足机器人控制器已就绪.\r\n");
+	printf("--- 命令格式: gait_name:action[:steps] ---\r\n");
+	printf("  stand\r\n");
+	printf("  tripod:forward[:steps]\r\n");
+	printf("  tripod:backward[:steps]\r\n");
+	printf("  tripod:turn_left[:steps]\r\n");
+	printf("  tripod:turn_right[:steps]\r\n");
+	printf("  wave:forward[:steps]\r\n");
+	printf("  wave:backward[:steps]\r\n");
+	printf("  wave:turn_left[:steps]\r\n");
+	printf("  wave:turn_right[:steps]\r\n");
+	printf("  ripple:forward[:steps]\r\n");
+	printf("  ripple:backward[:steps]\r\n");
+	printf("  trot:forward[:steps]\r\n");
+
+    // --- 新增：打印武器命令提示 ---
+    printf("--- 武器系统命令 ---\r\n");
+    printf("  weapon:charge  (充电2秒)\r\n");
+    printf("  weapon:fire    (发射1秒)\r\n");
+
+	printf("--- 调试命令 ---\r\n");
+	printf("  c[腿号...]:set_point:x:y:z:time (同步)\r\n");
+	printf("  c[腿号...]:[forward|backward] (顺序)\r\n");
 
   /* USER CODE END 2 */
 
@@ -403,6 +442,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+	Weapon_Process(); // <--- 新增：非阻塞状态机处理，实时检查时间
+
     if (g_command_ready)
     {
         Process_Command((const char*)rx_cmd_buffer);
@@ -473,8 +515,7 @@ void Error_Handler(void)
   }
   /* USER CODE END Error_Handler_Debug */
 }
-
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -490,4 +531,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-

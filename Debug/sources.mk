@@ -24,5 +24,15 @@ C_DEPS :=
 SUBDIRS := \
 Core/Src \
 Core/Startup \
+DSP_LIB/Source/BasicMathFunctions \
+DSP_LIB/Source/CommonTables \
+DSP_LIB/Source/ComplexMathFunctions \
+DSP_LIB/Source/ControllerFunctions \
+DSP_LIB/Source/FastMathFunctions \
+DSP_LIB/Source/FilteringFunctions \
+DSP_LIB/Source/MatrixFunctions \
+DSP_LIB/Source/StatisticsFunctions \
+DSP_LIB/Source/SupportFunctions \
+DSP_LIB/Source/TransformFunctions \
 Drivers/STM32F1xx_HAL_Driver/Src \
 
